@@ -25,7 +25,7 @@ You can Alt+Tab to get a list of open windows, and cycle through them.
 
 And you can filter this to apply to only the current desktop, or all desktops.
 Again, pretty standard.
-You can hit the top left corner of the screen to see thumbnails of all open windows, or Ctrl+<F9> - then you can jump to the window you want.
+You can hit the top left corner of the screen to see thumbnails of all open windows, or `Ctrl+<F9>` - then you can jump to the window you want.
 
 ## Taming the menu
 Xfce has a horrible menu system.
