@@ -13,8 +13,9 @@ You can move windows between desktops by dragging the outlines on the desktop ic
 KDE has excellent support for keyboard shortcuts - You can move between desktops, and move windows between desktops, using the keyboard.
 The default shortcuts are `Ctrl+F1` to switch to desktop 1....  , and you can add custom shortcuts for other actions.
 
-If you have many windows open for the same qube, KDE will nest them under a single button.
-kde1 - if you hover over, you will see a thumbnail.  
+If you have many windows open for the same qube,
+KDE will nest them under a single button - if you hover over, you will see a thumbnail.
+You can click this to jump to the window.
 ![Hovering over windows](Images/kde1.png)
 If you click, a list of the windows.  
 ![Listing windows](Images/kde2.png)
@@ -35,7 +36,7 @@ KDE has a number of different menu widgets - a full screen dashboard, a launcher
 ![KDE launcher](Images/kde_menu.png)
 , or a more traditional menu.
 ![KDE menu](Images/kde_menu2.png)
-The LeftHand side contains Favourites - the top icon is for KDE settings, useful for setting custom keyboard shortcuts and window controls.
+The Left Hand side contains Favourites - the top icon is for KDE settings, useful for setting custom keyboard shortcuts and window controls.
 
 KDE has a menu editor - Right click on the Menu Icon and select "Edit Applications".
 ![getting to the menu editor](Images/kde_menu3.png)
@@ -55,4 +56,53 @@ You can also customise Favourites - Right click on any entry, and select "Add to
 ![Adding applications to the Favourites list](Images/kde_menu8.png)
 
 Of course, you can also add short cuts to the desktop. Just Right click on any entry, and select "Add to Desktop"
+
+## Activities
+So KDE provides a decent menu system, virtual desktops, simple tools to organise and find windows, and excellent keyboard controls over all aspects of windows.  
+But it's Activities that really make it ideal for Qubes use.
+
+What are activities? You can think of them as a way of separating each desktop in to an independent workspace.  
+What that means in practice is that you can create activities, each with their own wallpaper, widgets and shortcuts.  
+Here is a "personal" activity:  
+![Desktop of the personal activity ](Images/kde5.png)
+Here is the "work" activity:  
+![Desktop of the work activity ](Images/kde6.png)
+
+This really helps in Qubes in ensuring that related windows are grouped together, minimising the risk of transferring data between the wrong qubes.
+You can use the Qubes colours to identify each activity.
+
+There is an "Activity" switcher, like the desktop switcher, and you can move windows between activities.
+You can also set keyboard shortcuts to move between activities, or cycle between them: `Meta+Tab` to cycle activities, like `Alt+Tab` cycles windows.
+
+You can create Activities from the menu in the Top Right of the screen:
+![Drop down menu ](Images/Activity_menu.png)
+
+![Create Activity](Images/Activity_menu3.png)
+
+![Activity Switcher](Images/kde4.png)
+
+You can force windows from specific qubes to appear in a specific Activity.
+Do this by Right Clicking on the title bar, More Actions ->Special Window Settings.  
+![Window Settings Menu](Images/kde7.png)
+On the "Window matching" Pane, substring match to the name of the qube.  
+![Window Settings Menu](Images/kde8.png)
+On the "Size and Position", Select Activity, and Force to the Activity you want.  
+![Window Settings Menu](Images/kde9.png)
+Now every window from that qube will only appear in the activity you selected.
+You can also control where windows will appear on the screen, at what size.
+
+If you are using Activities, you can tune your shortcuts a little.
+Each activity has its own UUID - you can see this:  
+`qdbus org.kde.ActivityManager /ActivityManager/Activities  CurrentActivity`
+e.g `5a97605e-fcbc-4c6d-ad1c-232a0463baf5`
+
+Create a file in dom0:
+```
+#!/bin/sh
+qdbus org.kde.ActivityManager /ActivityManager/Activities  SetCurrentActivity 5a97605e-fcbc-4c6d-ad1c-232a0463baf5
+qvm-run work libreoffice &
+```
+And link it to a shortcut - now the shortcut will switch you to the Work Activity and open libreoffice.
+
+
 
