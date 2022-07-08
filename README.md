@@ -50,7 +50,7 @@ looks like this:
 #!/usr/bin/sh
 
 # Use Qubes provided menu instead of default XFCE one
-if [ "$XDG_SESSION_DESKTOP" = "KDE" ]; then
+if [ "$XDG_SESSION_DESKTOP" = "KDE" ] ||  [ "$XDG_SESSION_DESKTOP" = "plasma" ]; then
   XDG_MENU_PREFIX="kf5-"
 else
   XDG_MENU_PREFIX="qubes-"
