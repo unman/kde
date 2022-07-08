@@ -1,15 +1,20 @@
-# KDE in Qubes
+# KDE in Qubes 4.1
 KDE can be installed very simply:  
-`sudo qubes-dom0-update @kde-desktop-qubes`
+`sudo qubes-dom0-update kde-settings-qubes`
 
-Log out, you can then choose Plasma and log in.
+You may also wish to install `sddm` for a better log in experience.
+
+Log out: you can then choose Plasma from the drop down menu and log in.
 
 ## Virtual Desktops
 The system starts with a single desktop.  
 You can add more desktops by Right Clicking on the desktop icon and selecting "Add Virtual desktop".  
 ![Adding a desktop](Images/desktops.png)
+If you do not see the icon, right click on the Panel, and select "Edit Panel" - the desktop pager will then be available.  
+Or you can open "System Settings" -> ""Workspace Behaviour" -> "Virtual Desktops"
 
-You can move windows between desktops by dragging the outlines on the desktop icon.  
+
+You can move windows between desktops by dragging the outlines on the desktop pager.  
 KDE has excellent support for keyboard shortcuts - You can move between desktops, and move windows between desktops, using the keyboard.
 The default shortcuts are `Ctrl+F1` to switch to desktop 1....  , and you can add custom shortcuts for other actions.
 
@@ -37,6 +42,23 @@ KDE has a number of different menu widgets - a full screen dashboard, a launcher
 , or a more traditional menu.
 ![KDE menu](Images/kde_menu2.png)
 The Left Hand side contains Favourites - the top icon is for KDE settings, useful for setting custom keyboard shortcuts and window controls.
+
+To be able to edit the KDE menu, edit the file:  
+`/etc/X11/xinit/xinitrc.d/55xfce-qubes.sh`, so that it
+looks like this:  
+```
+#!/usr/bin/sh
+
+# Use Qubes provided menu instead of default XFCE one
+if [ "$XDG_SESSION_DESKTOP" = "KDE" ]; then
+  XDG_MENU_PREFIX="kf5-"
+else
+  XDG_MENU_PREFIX="qubes-"
+fi
+
+export XDG_MENU_PREFIX
+```
+
 
 KDE has a menu editor - Right click on the Menu Icon and select "Edit Applications".
 ![getting to the menu editor](Images/kde_menu3.png)
@@ -74,7 +96,8 @@ You can use the Qubes colours to identify each activity.
 There is an "Activity" switcher, like the desktop switcher, and you can move windows between activities.
 You can also set keyboard shortcuts to move between activities, or cycle between them: `Meta+Tab` to cycle activities, like `Alt+Tab` cycles windows.
 
-You can create Activities from the menu in the Top Right of the screen:
+You can open the Activity Manager from the Right-Click Menu on the desktop, or add an "Activity" widget - RightClick->"Add widgets"->Actvity and drag the icon where you want it on the desktop or the panel.  
+You can create Activities from the Manager:
 ![Drop down menu ](Images/Activity_menu.png)
 
 ![Create Activity](Images/Activity_menu3.png)
